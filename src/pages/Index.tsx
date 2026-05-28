@@ -470,7 +470,7 @@ export default function Index() {
                 <span className="eyebrow" style={{ display: "inline-flex" }}>Нумерология как инструмент</span>
               </div>
               <h1 style={{ textAlign: "center", maxWidth: "none", fontSize: "clamp(2.8rem, 1.7rem + 4vw, 5.4rem)" }}>
-                Практический онлайн-курс<br />с Екатериной Усовой
+                Практический онлайн&#8209;курс<br />с Екатериной Усовой
               </h1>
               <p className="lead hero-lead" style={{ textAlign: "center", margin: "20px auto 0", maxWidth: "62ch" }}>
                 Для самопознания, работы с людьми и в качестве дополнительного профессионального инструмента. Нумерология — инструмент анализа личности, жизненных циклов и взаимодействия людей через дату рождения.
