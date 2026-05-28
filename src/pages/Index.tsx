@@ -568,7 +568,7 @@ export default function Index() {
         <section className="section">
           <div className="wrap">
             <R className="author-box">
-              <img src={PHOTO} alt="Екатерина Усова" width="500" height="700" loading="lazy" />
+              <img src={PHOTO} alt="Екатерина Усова" width="500" height="700" loading="lazy" style={{ display: "block", margin: "0 auto" }} />
               <div>
                 <h2>Об авторе курса</h2>
                 <p className="lead" style={{ marginBottom: "16px" }}>
