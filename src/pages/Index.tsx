@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const PHOTO =
   "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/309872e0-5c35-4af7-af30-fd44780a43c4.jpeg";
@@ -24,6 +24,148 @@ function R({ tag: Tag = "div", children, className = "", ...props }: { tag?: key
     <Tag ref={ref as React.Ref<HTMLElement>} className={`reveal${className ? " " + className : ""}`} {...props}>
       {children}
     </Tag>
+  );
+}
+
+const MODULES = [
+  { title: "МОДУЛЬ 1 — Основы нумерологии", items: ["знакомство с системой", "значения чисел", "базовые принципы анализа"] },
+  { title: "МОДУЛЬ 2 — Нумерология имени", items: ["влияние имени", "внутренние качества личности", "особенности характера и проявления человека"] },
+  { title: "МОДУЛЬ 3 — Нумерология даты рождения", items: ["предназначение", "сильные и слабые стороны", "жизненные задачи", "потенциал человека"] },
+  { title: "МОДУЛЬ 4 — Предсказательная нумерология", items: ["прогнозы на день", "месяц", "год", "периоды изменений и возможностей"] },
+  { title: "МОДУЛЬ 5 — Матрица судьбы · Карта Жизненного Пути", items: ["чтение карты", "анализ жизненных сценариев", "понимание внутренних процессов человека"] },
+];
+
+const HOW = [
+  "Обучение проходит в Telegram",
+  "Новый урок открывается раз в неделю",
+  "Доступны видеоуроки, материалы и практика",
+  "Домашние задания проверяются лично мной",
+  "Раз в 2 недели — прямые эфиры с разбором вопросов и практики",
+  "На втором месяце вы получите клиента для практического разбора",
+];
+
+const AFTER = [
+  "Сможете использовать нумерологию для себя и близких",
+  "Научитесь делать базовые расчёты и прогнозы",
+  "Освоите чтение карты жизненного пути",
+  "Получите дополнительный инструмент для работы с людьми",
+  "Сможете интегрировать знания в свою практику",
+];
+
+function ProgramAccordion() {
+  const [open, setOpen] = useState(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div style={{ width: "100%", maxWidth: "560px", textAlign: "left" }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          width: "100%",
+          display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px",
+          padding: "0 24px",
+          minHeight: "52px",
+          borderRadius: "9999px",
+          border: "1px solid transparent",
+          background: "linear-gradient(135deg, #c9a46a, #e1c08f)",
+          color: "#22160b",
+          fontFamily: "var(--font-b)",
+          fontWeight: 800,
+          fontSize: "clamp(0.875rem, 0.8rem + 0.35vw, 1rem)",
+          cursor: "pointer",
+          boxShadow: "0 12px 30px rgba(201,164,106,0.24)",
+          transition: "transform 220ms, box-shadow 220ms",
+          flexShrink: 0,
+        }}
+      >
+        <span>Посмотреть программу курса</span>
+        <svg
+          width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+          style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 300ms", flexShrink: 0 }}
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+
+      <div
+        ref={bodyRef}
+        style={{
+          overflow: "hidden",
+          maxHeight: open ? "2000px" : "0",
+          transition: "max-height 0.55s cubic-bezier(0.16,1,0.3,1)",
+        }}
+      >
+        <div style={{
+          marginTop: "16px",
+          borderRadius: "20px",
+          border: "1px solid rgba(255,255,255,0.09)",
+          background: "rgba(255,255,255,0.04)",
+          backdropFilter: "blur(12px)",
+          padding: "28px 24px",
+          display: "flex", flexDirection: "column", gap: "20px",
+          boxShadow: "0 20px 60px rgba(6,4,11,0.4)",
+        }}>
+          {/* Модули */}
+          <div>
+            <p style={{ fontWeight: 700, color: "var(--c-gold)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "14px" }}>
+              Что входит в программу
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              {MODULES.map((m, i) => (
+                <div key={i} style={{ padding: "14px 16px", borderRadius: "14px", border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)" }}>
+                  <p style={{ fontWeight: 700, color: "var(--c-text)", marginBottom: "8px", fontSize: "0.9375rem" }}>{m.title}</p>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "4px" }}>
+                    {m.items.map((it, j) => (
+                      <li key={j} style={{ color: "var(--c-muted)", fontSize: "0.875rem", paddingLeft: "14px", position: "relative" }}>
+                        <span style={{ position: "absolute", left: 0, color: "var(--c-gold)" }}>•</span>
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Как проходит */}
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "18px" }}>
+            <p style={{ fontWeight: 700, color: "var(--c-gold)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+              Как проходит обучение
+            </p>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
+              {HOW.map((t, i) => (
+                <li key={i} style={{ color: "var(--c-muted)", fontSize: "0.875rem", display: "flex", gap: "8px" }}>
+                  <span style={{ color: "var(--c-gold)", flexShrink: 0 }}>📌</span>{t}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Длительность */}
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "18px" }}>
+            <p style={{ fontWeight: 700, color: "var(--c-gold)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "8px" }}>
+              Длительность курса
+            </p>
+            <p style={{ color: "var(--c-text)", fontWeight: 700, marginBottom: "4px" }}>2 месяца обучения</p>
+            <p style={{ color: "var(--c-muted)", fontSize: "0.875rem" }}>Вы проходите материал в комфортном темпе с поддержкой и сопровождением.</p>
+          </div>
+
+          {/* После курса */}
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "18px" }}>
+            <p style={{ fontWeight: 700, color: "var(--c-gold)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
+              После прохождения курса
+            </p>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
+              {AFTER.map((t, i) => (
+                <li key={i} style={{ color: "var(--c-muted)", fontSize: "0.875rem", display: "flex", gap: "8px" }}>
+                  <span style={{ color: "#7ec86e", flexShrink: 0 }}>✔</span>{t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -303,9 +445,9 @@ export default function Index() {
               <p className="lead hero-lead" style={{ textAlign: "center", margin: "20px auto 0", maxWidth: "62ch" }}>
                 Для самопознания, работы с людьми и в качестве дополнительного профессионального инструмента. Нумерология — инструмент анализа личности, жизненных циклов и взаимодействия людей через дату рождения.
               </p>
-              <div className="hero-actions" style={{ justifyContent: "center" }}>
-                <a className="btn" href="#program">Посмотреть программу курса</a>
-                <a className="btn-sec" href="#about-course">О курсе</a>
+              <div className="hero-actions" style={{ justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                <ProgramAccordion />
+                <a className="btn-sec" href="#about-course" style={{ marginTop: "4px" }}>О курсе</a>
               </div>
               <div className="hero-points" style={{ maxWidth: "720px", margin: "32px auto 0" }}>
                 <div className="hero-point"><strong>2 месяца</strong>Пошаговое обучение от основ к практике.</div>
