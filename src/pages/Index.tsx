@@ -588,14 +588,11 @@ export default function Index() {
             <R className="cta-shell">
               <div className="cta-grid">
                 <div>
-                  <h2>Полную программу и условия участия я собрала в чат-боте</h2>
-                  <p className="lead" style={{ marginTop: "12px" }}>
-                    Там можно посмотреть модули курса, узнать формат оплаты, задать вопросы и записаться на обучение.
-                  </p>
+                  <h2>Остались вопросы? Хотите узнать про рассрочку?</h2>
                 </div>
                 <div>
                   <a className="btn" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer">
-                    Посмотреть программу курса
+                    Задать вопрос
                   </a>
                 </div>
               </div>
