@@ -92,132 +92,93 @@ export default function Index() {
       </header>
 
       {/* HERO */}
-      <section
-        id="hero"
-        className="relative min-h-screen flex items-center overflow-hidden"
-        style={{ paddingTop: "80px" }}
-      >
-        {/* Orbs */}
-        <div className="orb w-[600px] h-[600px] top-0 left-0 -translate-x-1/3 -translate-y-1/4" style={{ background: "rgba(200,168,255,0.1)" }} />
-        <div className="orb w-[400px] h-[400px] bottom-0 left-1/4" style={{ background: "rgba(201,164,106,0.08)" }} />
+      <section id="hero" className="relative overflow-hidden" style={{ paddingTop: "72px" }}>
 
-        {/* Decorative stars */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="star absolute rounded-full"
-              style={{
-                width: i % 3 === 0 ? "3px" : "2px",
-                height: i % 3 === 0 ? "3px" : "2px",
-                background: i % 2 === 0 ? "var(--c-accent)" : "var(--c-accent2)",
-                top: `${5 + (i * 19) % 88}%`,
-                left: `${3 + (i * 27) % 55}%`,
-                animationDelay: `${i * 0.25}s`,
-              }}
-            />
-          ))}
+        {/* ── PHOTO full-width ── */}
+        <div className="relative w-full" style={{ maxHeight: "90vh", overflow: "hidden" }}>
+          {/* Orb behind photo */}
+          <div className="orb w-[700px] h-[500px] top-0 left-1/2 -translate-x-1/2" style={{ background: "rgba(200,168,255,0.13)" }} />
+
+          <img
+            src={PHOTO_IMG}
+            alt="Екатерина Усова"
+            className="anim-fade w-full object-cover object-top"
+            style={{
+              height: "clamp(420px, 75vw, 820px)",
+              display: "block",
+              maskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+            }}
+          />
+
+          {/* Decorative stars over photo */}
+          <div className="absolute inset-0 pointer-events-none" aria-hidden>
+            {[...Array(16)].map((_, i) => (
+              <div
+                key={i}
+                className="star absolute rounded-full"
+                style={{
+                  width: i % 3 === 0 ? "3px" : "2px",
+                  height: i % 3 === 0 ? "3px" : "2px",
+                  background: i % 2 === 0 ? "var(--c-accent)" : "var(--c-accent2)",
+                  top: `${5 + (i * 17) % 80}%`,
+                  left: `${4 + (i * 29) % 92}%`,
+                  animationDelay: `${i * 0.3}s`,
+                }}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-0 items-center min-h-screen">
+        {/* ── TEXT BLOCK ── */}
+        <div className="relative z-10 px-6 md:px-10 pt-12 pb-20 text-center max-w-4xl mx-auto">
 
-          {/* LEFT — text */}
-          <div className="flex flex-col justify-center py-16 md:py-24 md:pr-10">
-            <div
-              className="anim-fade-up inline-flex self-start items-center gap-2 px-4 py-1.5 rounded-full mb-7 text-xs font-semibold uppercase tracking-widest"
+          {/* Ornament */}
+          <div className="ornament mb-8">
+            <span
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest"
               style={{ border: "1px solid rgba(201,164,106,0.3)", background: "rgba(201,164,106,0.08)", color: "var(--c-accent)" }}
             >
               <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--c-accent)" }} />
               Нумерология как инструмент
-            </div>
-
-            <h1
-              className="anim-fade-up d100 font-display font-medium mb-6"
-              style={{ fontSize: "clamp(2.6rem, 5vw, 4.5rem)", lineHeight: 1.07, letterSpacing: "-.01em" }}
-            >
-              Практический<br />
-              <span className="text-gold-shimmer italic">онлайн-курс</span>
-              <br />
-              <span style={{ color: "var(--c-text)" }}>с Екатериной Усовой</span>
-            </h1>
-
-            <p className="anim-fade-up d200 text-base leading-relaxed mb-8 max-w-lg" style={{ color: "var(--c-muted)" }}>
-              Для самопознания, работы с людьми и в качестве дополнительного профессионального инструмента.
-              Нумерология — инструмент анализа личности, жизненных циклов и взаимодействия людей через дату рождения.
-            </p>
-
-            <div className="anim-fade-up d300 flex flex-wrap gap-3 mb-10">
-              <a href="#program" className="btn-gold">
-                Посмотреть программу курса
-                <Icon name="ArrowRight" size={16} />
-              </a>
-              <a href="#about-course" className="btn-ghost">О курсе</a>
-            </div>
-
-            {/* Facts */}
-            <div className="anim-fade-up d400 grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {[
-                { t: "2 месяца", d: "Пошаговое обучение от основ к практике." },
-                { t: "Онлайн", d: "Видео-уроки, разборы и сопровождение." },
-                { t: "Для жизни и работы", d: "Знания, которые применяются сразу." },
-              ].map((f, i) => (
-                <div key={i} className="card-base p-4">
-                  <div className="font-display text-lg font-semibold mb-0.5" style={{ color: "var(--c-accent)" }}>{f.t}</div>
-                  <div className="text-xs leading-relaxed" style={{ color: "var(--c-muted)" }}>{f.d}</div>
-                </div>
-              ))}
-            </div>
+            </span>
           </div>
 
-          {/* RIGHT — photo */}
-          <div className="hidden md:flex relative items-end justify-center self-stretch">
-            {/* Glow behind photo */}
-            <div
-              className="absolute inset-x-0 bottom-0 top-[10%]"
-              style={{ background: "radial-gradient(ellipse 80% 70% at 50% 90%, rgba(200,168,255,0.18) 0%, transparent 70%)" }}
-            />
-            {/* Vertical golden line left edge */}
-            <div
-              className="absolute left-0 top-[15%] bottom-0 w-px"
-              style={{ background: "linear-gradient(to bottom, transparent, rgba(201,164,106,0.3) 30%, rgba(201,164,106,0.15) 80%, transparent)" }}
-            />
-            {/* Photo */}
-            <div className="relative w-full h-full flex items-end justify-center" style={{ paddingTop: "80px" }}>
-              <img
-                src={PHOTO_IMG}
-                alt="Екатерина Усова"
-                className="anim-fade-up d200 relative z-10 w-full object-cover object-top"
-                style={{
-                  height: "calc(100vh - 80px)",
-                  maxHeight: "860px",
-                  objectPosition: "center top",
-                  maskImage: "linear-gradient(to bottom, transparent 0%, black 12%, black 78%, transparent 100%)",
-                  WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 12%, black 78%, transparent 100%)",
-                }}
-              />
-              {/* Badge over photo */}
-              <div
-                className="absolute bottom-16 left-4 z-20"
-                style={{ background: "rgba(23,19,29,0.75)", backdropFilter: "blur(14px)", border: "1px solid rgba(201,164,106,0.25)", borderRadius: "1rem", padding: ".875rem 1.25rem", maxWidth: "240px" }}
-              >
-                <div className="text-sm font-semibold mb-0.5" style={{ color: "var(--c-accent)" }}>Психолог-практик</div>
-                <div className="text-xs leading-relaxed" style={{ color: "var(--c-muted)" }}>Нумеролог · Астропсихолог</div>
+          <h1
+            className="anim-fade-up font-display font-medium mb-6"
+            style={{ fontSize: "clamp(3rem, 7vw, 6rem)", lineHeight: 1.06, letterSpacing: "-.015em" }}
+          >
+            Практический<br />
+            <span className="text-gold-shimmer italic">онлайн-курс</span>
+            <br />
+            <span style={{ color: "var(--c-text)" }}>с Екатериной Усовой</span>
+          </h1>
+
+          <p className="anim-fade-up d100 text-base md:text-lg leading-relaxed mb-10 max-w-2xl mx-auto" style={{ color: "var(--c-muted)" }}>
+            Для самопознания, работы с людьми и в качестве дополнительного профессионального инструмента.
+            Нумерология — инструмент анализа личности, жизненных циклов и взаимодействия людей через дату рождения.
+          </p>
+
+          <div className="anim-fade-up d200 flex flex-col sm:flex-row gap-3 justify-center mb-12">
+            <a href="#program" className="btn-gold">
+              Посмотреть программу курса
+              <Icon name="ArrowRight" size={16} />
+            </a>
+            <a href="#about-course" className="btn-ghost">О курсе</a>
+          </div>
+
+          {/* Facts */}
+          <div className="anim-fade-up d300 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            {[
+              { t: "2 месяца", d: "Пошаговое обучение от основ к практике." },
+              { t: "Онлайн-формат", d: "Видео-уроки, разборы и сопровождение." },
+              { t: "Для жизни и работы", d: "Знания, которые применяются сразу." },
+            ].map((f, i) => (
+              <div key={i} className="card-base p-5">
+                <div className="font-display text-xl font-semibold mb-1" style={{ color: "var(--c-accent)" }}>{f.t}</div>
+                <div className="text-xs leading-relaxed" style={{ color: "var(--c-muted)" }}>{f.d}</div>
               </div>
-            </div>
-          </div>
-
-          {/* Mobile photo strip */}
-          <div className="md:hidden relative w-full mt-6 mb-2 overflow-hidden rounded-2xl" style={{ border: "1px solid rgba(201,164,106,0.15)" }}>
-            <img
-              src={PHOTO_IMG}
-              alt="Екатерина Усова"
-              className="w-full object-cover object-top"
-              style={{ height: "340px" }}
-            />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(23,19,29,0.8) 0%, transparent 50%)" }} />
-            <div className="absolute bottom-4 left-4 right-4">
-              <div className="text-sm font-semibold" style={{ color: "var(--c-accent)" }}>Психолог-практик · Нумеролог · Астропсихолог</div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
