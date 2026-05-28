@@ -127,42 +127,7 @@ function ProgramAccordion() {
             </div>
           </div>
 
-          {/* Как проходит */}
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "18px" }}>
-            <p style={{ fontWeight: 700, color: "var(--c-gold)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
-              Как проходит обучение
-            </p>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
-              {HOW.map((t, i) => (
-                <li key={i} style={{ color: "var(--c-muted)", fontSize: "0.875rem", display: "flex", gap: "8px" }}>
-                  <span style={{ color: "var(--c-gold)", flexShrink: 0 }}>📌</span>{t}
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* Длительность */}
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "18px" }}>
-            <p style={{ fontWeight: 700, color: "var(--c-gold)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "8px" }}>
-              Длительность курса
-            </p>
-            <p style={{ color: "var(--c-text)", fontWeight: 700, marginBottom: "4px" }}>2 месяца обучения</p>
-            <p style={{ color: "var(--c-muted)", fontSize: "0.875rem" }}>Вы проходите материал в комфортном темпе с поддержкой и сопровождением.</p>
-          </div>
-
-          {/* После курса */}
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: "18px" }}>
-            <p style={{ fontWeight: 700, color: "var(--c-gold)", fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "12px" }}>
-              После прохождения курса
-            </p>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
-              {AFTER.map((t, i) => (
-                <li key={i} style={{ color: "var(--c-muted)", fontSize: "0.875rem", display: "flex", gap: "8px" }}>
-                  <span style={{ color: "#7ec86e", flexShrink: 0 }}>✔</span>{t}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
     </div>
