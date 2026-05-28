@@ -586,15 +586,11 @@ export default function Index() {
         <section className="section" style={{ paddingBottom: "clamp(64px, 10vw, 120px)" }}>
           <div className="wrap">
             <R className="cta-shell">
-              <div className="cta-grid">
-                <div>
-                  <h2>Остались вопросы? Хотите узнать про рассрочку?</h2>
-                </div>
-                <div>
-                  <a className="btn" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer">
-                    Задать вопрос
-                  </a>
-                </div>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "24px" }}>
+                <h2>Остались вопросы? Хотите узнать про рассрочку?</h2>
+                <a className="btn" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer">
+                  Задать вопрос
+                </a>
               </div>
             </R>
           </div>
