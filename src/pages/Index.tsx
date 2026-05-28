@@ -113,14 +113,29 @@ export default function Index() {
         }
         .btn-sec:hover { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
 
-        /* HERO */
-        .hero { padding: clamp(56px, 8vw, 110px) 0 clamp(48px, 8vw, 88px); }
-        .hero-grid {
-          display: grid;
-          grid-template-columns: 1.15fr 0.85fr;
-          align-items: center;
-          gap: clamp(24px, 5vw, 64px);
+        /* HERO PHOTO */
+        .hero-photo-wrap {
+          width: 100%;
+          max-height: 88vh;
+          overflow: hidden;
+          position: relative;
         }
+        .hero-photo-wrap img {
+          width: 100%;
+          height: clamp(380px, 65vw, 860px);
+          object-fit: cover;
+          object-position: center top;
+          display: block;
+          mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+        }
+        .hero-photo-wrap .photo-orb {
+          position: absolute; pointer-events: none;
+          border-radius: 50%; filter: blur(90px);
+        }
+
+        /* HERO TEXT */
+        .hero { padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 8vw, 88px); }
         .eyebrow {
           display: inline-flex; align-items: center; gap: 10px;
           padding: 10px 14px; border-radius: 9999px;
@@ -156,34 +171,7 @@ export default function Index() {
         }
         .hero-point strong { display: block; color: var(--c-text); margin-bottom: 4px; }
 
-        /* PHOTO CARD */
-        .hero-visual { position: relative; }
-        .photo-card {
-          position: relative; border-radius: 32px; overflow: hidden;
-          border: 1px solid rgba(255,255,255,0.10);
-          box-shadow: var(--c-shadow);
-        }
-        .photo-card img {
-          width: 100%; aspect-ratio: 0.72;
-          object-fit: cover; object-position: center top;
-        }
-        .photo-card::after {
-          content: ""; position: absolute; inset: auto 0 0;
-          height: 32%;
-          background: linear-gradient(180deg, rgba(23,19,29,0) 0%, rgba(23,19,29,0.72) 100%);
-        }
-        .photo-badge, .floating-note {
-          position: absolute; z-index: 2;
-          border-radius: 20px;
-          border: 1px solid rgba(255,255,255,0.10);
-          backdrop-filter: blur(14px);
-          background: rgba(29,22,39,0.75);
-          box-shadow: var(--c-shadow);
-        }
-        .photo-badge { left: -18px; bottom: 28px; padding: 16px 18px; max-width: 265px; }
-        .floating-note { right: -16px; top: 26px; padding: 14px 16px; max-width: 220px; }
-        .photo-badge strong, .floating-note strong { display: block; color: var(--c-text); margin-bottom: 4px; }
-        .photo-badge span, .floating-note span { color: var(--c-muted); font-size: clamp(0.875rem, 0.8rem + 0.35vw, 1rem); }
+        /* (photo card styles removed — photo is now full-width above hero) */
 
         /* SECTIONS */
         .section { padding: clamp(56px, 8vw, 104px) 0; }
@@ -273,37 +261,34 @@ export default function Index() {
       </header>
 
       <main id="top">
-        {/* HERO */}
+
+        {/* FULL-WIDTH PHOTO */}
+        <div className="hero-photo-wrap">
+          <div className="photo-orb" style={{ width: "600px", height: "500px", top: 0, left: "50%", transform: "translateX(-50%)", background: "rgba(200,168,255,0.12)" }} />
+          <img src={PHOTO} alt="Екатерина Усова" width="1440" height="900" loading="eager" />
+        </div>
+
+        {/* HERO TEXT */}
         <section className="hero">
-          <div className="wrap hero-grid">
-            <R className="hero-copy">
-              <span className="eyebrow">Нумерология как инструмент</span>
-              <h1>Практический онлайн-курс с Екатериной Усовой</h1>
-              <p className="lead hero-lead">
+          <div className="wrap">
+            <R>
+              <div style={{ textAlign: "center", marginBottom: "16px" }}>
+                <span className="eyebrow" style={{ display: "inline-flex" }}>Нумерология как инструмент</span>
+              </div>
+              <h1 style={{ textAlign: "center", maxWidth: "none", fontSize: "clamp(2.8rem, 1.7rem + 4vw, 5.4rem)" }}>
+                Практический онлайн-курс<br />с Екатериной Усовой
+              </h1>
+              <p className="lead hero-lead" style={{ textAlign: "center", margin: "20px auto 0", maxWidth: "62ch" }}>
                 Для самопознания, работы с людьми и в качестве дополнительного профессионального инструмента. Нумерология — инструмент анализа личности, жизненных циклов и взаимодействия людей через дату рождения.
               </p>
-              <div className="hero-actions">
+              <div className="hero-actions" style={{ justifyContent: "center" }}>
                 <a className="btn" href="#program">Посмотреть программу курса</a>
                 <a className="btn-sec" href="#about-course">О курсе</a>
               </div>
-              <div className="hero-points">
+              <div className="hero-points" style={{ maxWidth: "720px", margin: "32px auto 0" }}>
                 <div className="hero-point"><strong>2 месяца</strong>Пошаговое обучение от основ к практике.</div>
                 <div className="hero-point"><strong>Онлайн-формат</strong>Видео-уроки, разборы и сопровождение.</div>
                 <div className="hero-point"><strong>Для жизни и работы</strong>Знания, которые можно применять сразу.</div>
-              </div>
-            </R>
-
-            <R className="hero-visual">
-              <div className="photo-card">
-                <img src={PHOTO} alt="Екатерина Усова" width="900" height="1250" loading="eager" />
-              </div>
-              <div className="floating-note">
-                <strong>Живой, прикладной подход</strong>
-                <span>Чтобы глубже понимать себя, близких, клиентов и партнёров.</span>
-              </div>
-              <div className="photo-badge">
-                <strong>Психолог-практик · нумеролог · астропсихолог</strong>
-                <span>Я веду курс мягко, структурно и без эзотерического тумана.</span>
               </div>
             </R>
           </div>
