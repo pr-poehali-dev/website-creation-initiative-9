@@ -447,12 +447,11 @@ export default function Index() {
               </p>
               <div className="hero-actions" style={{ justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                 <ProgramAccordion />
-                <a className="btn-sec" href="#about-course" style={{ marginTop: "4px" }}>О курсе</a>
               </div>
-              <div className="hero-points" style={{ maxWidth: "720px", margin: "32px auto 0" }}>
-                <div className="hero-point"><strong>2 месяца</strong>Пошаговое обучение от основ к практике.</div>
-                <div className="hero-point"><strong>Онлайн-формат</strong>Видео-уроки, разборы и сопровождение.</div>
-                <div className="hero-point"><strong>Для жизни и работы</strong>Знания, которые можно применять сразу.</div>
+              <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap", margin: "24px auto 0", maxWidth: "560px" }}>
+                {["2 месяца", "Онлайн-формат", "Знания применяете сразу"].map(t => (
+                  <span key={t} style={{ padding: "6px 16px", borderRadius: "9999px", border: "1px solid rgba(201,164,106,0.3)", background: "rgba(201,164,106,0.07)", color: "var(--c-muted)", fontSize: "0.875rem" }}>{t}</span>
+                ))}
               </div>
             </R>
           </div>
