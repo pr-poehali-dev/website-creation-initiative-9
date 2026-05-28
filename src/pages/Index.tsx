@@ -89,11 +89,10 @@ export default function Index() {
         .brand-sub { font-size: 0.8125rem; }
         /* Мобильная кнопка снизу — скрыта на десктопе */
         .mobile-cta-bar { display: none; }
-        .header-btn-short { display: none; }
+        .header-btn-short { display: inline-flex; }
         @media (max-width: 600px) {
           .mobile-cta-bar { display: flex; }
-          .header-btn { display: none !important; }
-          .header-btn-short { display: inline-flex !important; min-height: 40px; padding: 0 14px; font-size: 0.8rem; white-space: nowrap; }
+          .header-btn-short { min-height: 40px; padding: 0 14px; font-size: 0.8rem; white-space: nowrap; }
           .header-inner { min-height: 62px; }
           .brand-sub { display: none; }
           main { padding-bottom: 88px; }
@@ -267,7 +266,6 @@ export default function Index() {
               <span className="brand-sub">Практический курс по нумерологии</span>
             </span>
           </a>
-          <a className="btn header-btn" href="#program">Посмотреть программу курса</a>
           <a className="btn header-btn-short" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer">Присоединиться</a>
         </div>
       </header>
