@@ -169,6 +169,71 @@ function ProgramAccordion() {
   );
 }
 
+const BONUSES = [
+  "Профессии по дате рождения",
+  "Значение номера квартиры и дома",
+  "Как выбрать город проживания",
+  "Как подобрать подарок по дате рождения",
+];
+
+function BonusAccordion() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div style={{ width: "100%", maxWidth: "560px", textAlign: "left", marginTop: "12px" }}>
+      <button
+        onClick={() => setOpen(o => !o)}
+        style={{
+          width: "100%",
+          display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px",
+          padding: "0 24px",
+          minHeight: "52px",
+          borderRadius: "9999px",
+          border: "1px solid rgba(201,164,106,0.35)",
+          background: "rgba(201,164,106,0.08)",
+          color: "var(--c-gold)",
+          fontFamily: "var(--font-b)",
+          fontWeight: 700,
+          fontSize: "clamp(0.875rem, 0.8rem + 0.35vw, 1rem)",
+          cursor: "pointer",
+          transition: "background 220ms",
+        }}
+      >
+        <span>Бонусы к курсу 🎁</span>
+        <svg
+          width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+          style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 300ms", flexShrink: 0 }}
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+
+      <div style={{
+        overflow: "hidden",
+        maxHeight: open ? "600px" : "0",
+        transition: "max-height 0.45s cubic-bezier(0.16,1,0.3,1)",
+      }}>
+        <div style={{
+          marginTop: "12px",
+          borderRadius: "20px",
+          border: "1px solid rgba(255,255,255,0.09)",
+          background: "rgba(255,255,255,0.04)",
+          backdropFilter: "blur(12px)",
+          padding: "20px 24px",
+          display: "flex", flexDirection: "column", gap: "12px",
+        }}>
+          {BONUSES.map((b, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <span style={{ fontSize: "1.1rem" }}>🔥</span>
+              <span style={{ color: "var(--c-text)", fontSize: "0.9375rem", fontWeight: 500 }}>{b}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Index() {
   return (
     <>
@@ -447,6 +512,7 @@ export default function Index() {
               </p>
               <div className="hero-actions" style={{ justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                 <ProgramAccordion />
+                <BonusAccordion />
               </div>
               <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap", margin: "24px auto 0", maxWidth: "560px" }}>
                 {["2 месяца", "Онлайн-формат", "Знания применяете сразу"].map(t => (
