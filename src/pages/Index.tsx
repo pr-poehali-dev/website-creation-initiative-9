@@ -87,6 +87,14 @@ export default function Index() {
         }
         .brand-name { display: block; font-weight: 700; color: var(--c-text); }
         .brand-sub { font-size: 0.8125rem; }
+        /* Мобильная кнопка снизу — скрыта на десктопе */
+        .mobile-cta-bar { display: none; }
+        @media (max-width: 600px) {
+          .mobile-cta-bar { display: flex; }
+          .header-btn { display: none !important; }
+          .header-inner { min-height: 62px; }
+          main { padding-bottom: 80px; }
+        }
 
         /* BUTTONS */
         .btn, .btn-sec {
@@ -256,9 +264,21 @@ export default function Index() {
               <span className="brand-sub">Практический курс по нумерологии</span>
             </span>
           </a>
-          <a className="btn" href="#program">Посмотреть программу курса</a>
+          <a className="btn header-btn" href="#program">Посмотреть программу курса</a>
         </div>
       </header>
+
+      {/* Мобильная кнопка-закрепка снизу */}
+      <div style={{
+        position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 30,
+        padding: "12px 16px 20px",
+        background: "linear-gradient(to top, rgba(23,19,29,0.98) 60%, transparent)",
+        display: "flex", justifyContent: "center",
+      }} className="mobile-cta-bar">
+        <a className="btn" href="#program" style={{ width: "100%", maxWidth: "400px", justifyContent: "center" }}>
+          Посмотреть программу курса
+        </a>
+      </div>
 
       <main id="top">
 
