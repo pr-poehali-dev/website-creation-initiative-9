@@ -275,8 +275,8 @@ export default function Index() {
         background: "linear-gradient(to top, rgba(23,19,29,0.98) 60%, transparent)",
         display: "flex", justifyContent: "center",
       }} className="mobile-cta-bar">
-        <a className="btn" href="#program" style={{ width: "100%", maxWidth: "400px", justifyContent: "center" }}>
-          Посмотреть программу курса
+        <a className="btn" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer" style={{ width: "100%", maxWidth: "400px", justifyContent: "center" }}>
+          Присоединиться к курсу
         </a>
       </div>
 
