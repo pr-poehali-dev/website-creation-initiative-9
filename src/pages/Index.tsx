@@ -1,82 +1,44 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const HERO_IMG = "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/files/bda4d3ff-5647-413c-a4bd-9dde647a0f74.jpg";
+const HERO_IMG =
+  "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/files/ad6406a8-f505-44d3-b48b-56a45db4a7ba.jpg";
 
-const features = [
-  {
-    icon: "Zap",
-    title: "Молниеносная скорость",
-    desc: "Работает в 10 раз быстрее конкурентов. Никаких задержек — только результат.",
-  },
-  {
-    icon: "Shield",
-    title: "Надёжная защита",
-    desc: "Шифрование данных на каждом уровне. Ваша информация в полной безопасности.",
-  },
-  {
-    icon: "BarChart3",
-    title: "Аналитика в реальном времени",
-    desc: "Полная картина бизнеса одним взглядом. Принимайте решения на основе данных.",
-  },
-  {
-    icon: "Globe",
-    title: "Работает везде",
-    desc: "Веб, мобильные устройства, планшеты — единый опыт на любой платформе.",
-  },
-  {
-    icon: "Users",
-    title: "Для команд",
-    desc: "Совместная работа без барьеров. Синхронизация изменений в режиме реального времени.",
-  },
-  {
-    icon: "Headphones",
-    title: "Поддержка 24/7",
-    desc: "Живые специалисты готовы помочь в любое время суток.",
-  },
-];
-
-function useIntersection(threshold = 0.15) {
+/* ── Scroll animation hook ── */
+function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
+  const [vis, setVis] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
+      ([e]) => { if (e.isIntersecting) { setVis(true); obs.disconnect(); } },
       { threshold }
     );
     obs.observe(el);
     return () => obs.disconnect();
   }, [threshold]);
-
-  return { ref, visible };
+  return { ref, vis };
 }
 
-function AnimSection({
+function Reveal({
   children,
-  className = "",
   delay = 0,
+  className = "",
 }: {
   children: React.ReactNode;
-  className?: string;
   delay?: number;
+  className?: string;
 }) {
-  const { ref, visible } = useIntersection();
+  const { ref, vis } = useReveal();
   return (
     <div
       ref={ref}
       className={className}
       style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(40px)",
-        transition: `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`,
+        opacity: vis ? 1 : 0,
+        transform: vis ? "translateY(0)" : "translateY(36px)",
+        transition: `opacity .75s ease ${delay}ms, transform .75s ease ${delay}ms`,
       }}
     >
       {children}
@@ -84,255 +46,374 @@ function AnimSection({
   );
 }
 
+const whoCards = [
+  ["Мамам", "Чтобы лучше понимать характер ребёнка, его сильные стороны, таланты и вектор развития."],
+  ["Экспертам мягких ниш", "Психологам, коучам, наставникам — которым нужен ещё один точный инструмент."],
+  ["Предпринимателям", "Чтобы лучше чувствовать партнёрство, совместимость и особенности команды."],
+  ["Тем, кто хочет разобраться в себе", "Чтобы увидеть сильные стороны и понять повторяющиеся сценарии."],
+];
+
+const getCards = [
+  ["Понимание системы", "Научитесь читать карту жизненного пути и делать базовые расчёты."],
+  ["Навык анализа", "Начнёте видеть предназначение, сильные стороны и причины напряжения в отношениях."],
+  ["Прогнозирование", "Сможете делать прогнозы на день, месяц и год."],
+  ["Практический инструмент", "Начнёте лучше понимать клиентов, близких, детей и партнёров."],
+  ["Профессиональное расширение", "Сможете встроить нумерологию в свою практику."],
+  ["Новый вектор", "Для кого-то — новая опора, для кого-то — направление для монетизации."],
+];
+
+const programFeatures = [
+  ["Globe", "Онлайн-формат", "Можно учиться из любой точки мира."],
+  ["Play", "Видео-уроки", "К материалам можно возвращаться столько раз, сколько нужно."],
+  ["Users", "Практика и разборы", "Знания переходят в навык."],
+];
+
 export default function Index() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSent(true);
-  }
-
   return (
-    <div className="min-h-screen bg-[#080d12] font-body text-white overflow-x-hidden">
+    <div
+      className="min-h-screen overflow-x-hidden"
+      style={{ backgroundColor: "var(--c-bg)", color: "var(--c-text)", fontFamily: "'Manrope', sans-serif" }}
+    >
 
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 backdrop-blur-md bg-[#080d12]/70 border-b border-white/5">
-        <span className="font-display text-xl font-semibold tracking-widest text-white uppercase">
-          ПРОДУКТ
-        </span>
-        <div className="hidden md:flex items-center gap-8 text-sm text-white/60">
-          <a href="#hero" className="hover:text-white transition-colors">Главная</a>
-          <a href="#features" className="hover:text-white transition-colors">О продукте</a>
-          <a href="#contacts" className="hover:text-white transition-colors">Контакты</a>
+      <header
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 py-4"
+        style={{ backdropFilter: "blur(20px)", background: "rgba(23,19,29,0.75)", borderBottom: "1px solid rgba(201,164,106,0.1)" }}
+      >
+        <div>
+          <div className="font-display text-lg font-semibold" style={{ color: "var(--c-text)", letterSpacing: ".04em" }}>
+            Екатерина Усова
+          </div>
+          <div className="text-xs" style={{ color: "var(--c-muted)" }}>Практический курс по нумерологии</div>
         </div>
-        <a
-          href="#contacts"
-          className="px-5 py-2 rounded-full text-sm font-semibold bg-[#00ff80] text-[#080d12] hover:bg-[#00e5ff] transition-colors duration-300"
-        >
-          Начать
+        <a href="#program" className="btn-gold hidden md:inline-flex" style={{ padding: ".6rem 1.4rem", fontSize: ".85rem" }}>
+          Посмотреть программу
         </a>
-      </nav>
+      </header>
 
       {/* HERO */}
       <section
         id="hero"
-        className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 grid-bg overflow-hidden"
+        className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-28 pb-20 overflow-hidden"
       >
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#00ff80]/10 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-[#7c3aed]/15 blur-[100px] pointer-events-none" />
+        <div className="orb w-[520px] h-[520px] top-0 left-1/2 -translate-x-1/2 -translate-y-1/3" style={{ background: "rgba(200,168,255,0.12)" }} />
+        <div className="orb w-[360px] h-[360px] bottom-10 right-0" style={{ background: "rgba(201,164,106,0.1)" }} />
 
-        <div className="relative z-10 flex flex-col items-center animate-fade-in-up" style={{ animationFillMode: "forwards" }}>
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00ff80]/30 bg-[#00ff80]/10 text-[#00ff80] text-xs font-semibold uppercase tracking-widest mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00ff80] animate-pulse" />
-            Новый стандарт
-          </span>
+        {/* Decorative stars */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+          {[...Array(18)].map((_, i) => (
+            <div
+              key={i}
+              className="star absolute rounded-full"
+              style={{
+                width: i % 3 === 0 ? "3px" : "2px",
+                height: i % 3 === 0 ? "3px" : "2px",
+                background: i % 2 === 0 ? "var(--c-accent)" : "var(--c-accent2)",
+                top: `${8 + (i * 23) % 80}%`,
+                left: `${5 + (i * 31) % 90}%`,
+                animationDelay: `${i * 0.3}s`,
+              }}
+            />
+          ))}
+        </div>
 
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold uppercase leading-tight tracking-tight mb-6 max-w-4xl">
-            Ваш{" "}
-            <span className="text-gradient-shimmer">продукт</span>
-            <br />
-            меняет правила
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <div
+            className="anim-fade-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 text-xs font-semibold uppercase tracking-widest"
+            style={{ border: "1px solid rgba(201,164,106,0.3)", background: "rgba(201,164,106,0.08)", color: "var(--c-accent)" }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--c-accent)" }} />
+            Нумерология как инструмент
+          </div>
+
+          <h1 className="anim-fade-up d100 font-display text-5xl md:text-7xl lg:text-[5.5rem] font-medium mb-5" style={{ lineHeight: 1.08, letterSpacing: "-.01em" }}>
+            Практический<br />
+            <span className="text-gold-shimmer italic">онлайн-курс</span>
+            <br />с Екатериной Усовой
           </h1>
 
-          <p className="text-white/60 text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
-            Один инструмент — бесконечные возможности. Решение, которое трансформирует ваш бизнес уже с первого дня.
+          <p className="anim-fade-up d200 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: "var(--c-muted)" }}>
+            Для самопознания, работы с людьми и в качестве дополнительного профессионального инструмента.
+            Нумерология — инструмент анализа личности, жизненных циклов и взаимодействия людей через дату рождения.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="#contacts"
-              className="group px-8 py-4 rounded-full bg-[#00ff80] text-[#080d12] font-bold text-base hover:bg-[#00e5ff] transition-all duration-300 animate-glow flex items-center gap-2"
-            >
-              Попробовать бесплатно
-              <Icon name="ArrowRight" size={18} className="group-hover:translate-x-1 transition-transform" />
+          <div className="anim-fade-up d300 flex flex-col sm:flex-row gap-3 justify-center mb-16">
+            <a href="#program" className="btn-gold">
+              Посмотреть программу курса
+              <Icon name="ArrowRight" size={16} />
             </a>
-            <a
-              href="#features"
-              className="px-8 py-4 rounded-full border border-white/20 text-white/80 font-semibold text-base hover:border-white/50 hover:text-white transition-all duration-300"
-            >
-              Узнать больше
-            </a>
+            <a href="#about-course" className="btn-ghost">О курсе</a>
           </div>
-        </div>
 
-        <div className="relative mt-16 w-full max-w-4xl mx-auto animate-float" style={{ animationDelay: "1s" }}>
-          <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-[#00ff80]/5 relative">
-            <img src={HERO_IMG} alt="Продукт" className="w-full h-64 md:h-96 object-cover" />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#080d12]/80 via-transparent to-transparent" />
-          </div>
-        </div>
-
-        <div className="relative z-10 mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto">
-          {[
-            { val: "10x", label: "быстрее" },
-            { val: "99.9%", label: "uptime" },
-            { val: "5 000+", label: "клиентов" },
-          ].map((s, i) => (
-            <AnimSection key={i} delay={i * 100}>
-              <div className="text-center">
-                <div className="font-display text-3xl font-bold text-[#00ff80]">{s.val}</div>
-                <div className="text-white/50 text-sm mt-1">{s.label}</div>
+          {/* Facts */}
+          <div className="anim-fade-up d400 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-10">
+            {[
+              { t: "2 месяца", d: "Пошаговое обучение от основ к практике." },
+              { t: "Онлайн-формат", d: "Видео-уроки, разборы и сопровождение." },
+              { t: "Для жизни и работы", d: "Знания, которые можно применять сразу." },
+            ].map((f, i) => (
+              <div key={i} className="card-base p-5 text-left">
+                <div className="font-display text-xl font-semibold mb-1" style={{ color: "var(--c-accent)" }}>{f.t}</div>
+                <div className="text-sm leading-relaxed" style={{ color: "var(--c-muted)" }}>{f.d}</div>
               </div>
-            </AnimSection>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Hero image */}
+        <div className="relative w-full max-w-4xl mx-auto anim-float" style={{ animationDelay: "1.2s" }}>
+          <div className="rounded-2xl overflow-hidden relative" style={{ border: "1px solid rgba(201,164,106,0.15)", boxShadow: "0 40px 80px rgba(0,0,0,0.5)" }}>
+            <img src={HERO_IMG} alt="Курс нумерологии" className="w-full h-56 md:h-80 object-cover" />
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(23,19,29,0.85) 0%, transparent 55%)" }} />
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 flex flex-col sm:flex-row gap-4 justify-center">
+              {[
+                { t: "Живой, прикладной подход", d: "Чтобы глубже понимать себя, близких, клиентов и партнёров." },
+                { t: "Психолог-практик · нумеролог · астропсихолог", d: "Веду курс мягко, структурно и без эзотерического тумана." },
+              ].map((n, i) => (
+                <div
+                  key={i}
+                  style={{ background: "rgba(23,19,29,0.7)", backdropFilter: "blur(12px)", border: "1px solid rgba(201,164,106,0.2)", borderRadius: "1rem", padding: ".875rem 1.25rem", maxWidth: "280px" }}
+                  className="text-left"
+                >
+                  <div className="text-sm font-semibold mb-0.5" style={{ color: "var(--c-accent)" }}>{n.t}</div>
+                  <div className="text-xs leading-relaxed" style={{ color: "var(--c-muted)" }}>{n.d}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section id="features" className="relative py-28 px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#080d12] via-[#0d1520] to-[#080d12] pointer-events-none" />
+      {/* ABOUT COURSE */}
+      <section id="about-course" className="py-24 px-6" style={{ background: "linear-gradient(180deg, var(--c-bg) 0%, #1a1426 50%, var(--c-bg) 100%)" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="ornament mb-14"><span className="text-xs uppercase tracking-widest px-3">О курсе</span></div>
+          <div className="grid md:grid-cols-2 gap-14 items-start">
+            <Reveal>
+              <h2 className="font-display text-4xl md:text-5xl font-medium mb-6" style={{ lineHeight: 1.15 }}>
+                Иногда нам не хватает не мотивации,{" "}
+                <span className="italic" style={{ color: "var(--c-accent2)" }}>а понимания себя</span>
+              </h2>
+              <p className="text-base leading-relaxed mb-8" style={{ color: "var(--c-muted)" }}>
+                Когда одни и те же ситуации повторяются, дело часто не в слабости характера. Чаще всего человеку просто не хватает системы, через которую можно понять свои реакции, выборы и отношения.
+              </p>
+              <ul className="check-list">
+                {[
+                  "Почему с одними людьми легко, а с другими всё время напряжение.",
+                  "Почему ребёнок ведёт себя «не так», а партнёр словно не слышит вас.",
+                  "Почему в жизни снова и снова возвращаются похожие сценарии.",
+                  "Почему вроде бы стараетесь, а ясности о себе всё равно не хватает.",
+                ].map((t, i) => <li key={i}>{t}</li>)}
+              </ul>
+            </Reveal>
 
-        <div className="relative max-w-6xl mx-auto">
-          <AnimSection className="text-center mb-16">
-            <span className="text-[#00ff80] text-xs font-semibold uppercase tracking-widest">О продукте</span>
-            <h2 className="font-display text-4xl md:text-6xl font-bold uppercase mt-3 mb-4">
-              Почему выбирают <span className="text-gradient">нас</span>
+            <Reveal delay={150}>
+              <div className="card-base p-8">
+                <h3 className="font-display text-2xl font-semibold mb-4" style={{ color: "var(--c-accent)" }}>
+                  Как я работаю с этим инструментом
+                </h3>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--c-muted)" }}>
+                  Я смотрю на дату рождения не как на магию, а как на исходные данные. Через них можно анализировать личность, жизненные циклы и взаимодействие человека с другими людьми.
+                </p>
+                <ul className="check-list">
+                  {[
+                    "Помогает видеть сильные стороны и внутренние задачи человека.",
+                    "Даёт понятный язык для разговора о ребёнке, близких, клиентах и команде.",
+                    "Позволяет замечать закономерности там, где раньше всё казалось хаосом.",
+                    "Становится дополнительным инструментом в профессии и жизни.",
+                  ].map((t, i) => <li key={i}>{t}</li>)}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* WHO */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <Reveal className="text-center mb-14">
+            <div className="ornament mb-6"><span className="text-xs uppercase tracking-widest px-3">Аудитория</span></div>
+            <h2 className="font-display text-4xl md:text-5xl font-medium" style={{ lineHeight: 1.15 }}>
+              Кому подойдёт этот курс
             </h2>
-            <p className="text-white/50 text-lg max-w-2xl mx-auto">
-              Мы создали продукт, который решает реальные задачи. Без лишних слов — только ценность.
-            </p>
-          </AnimSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <AnimSection key={i} delay={i * 80}>
-                <div className="glow-border rounded-2xl p-6 bg-[#0d1520]/80 backdrop-blur h-full group cursor-default transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-xl bg-[#00ff80]/10 flex items-center justify-center mb-4 group-hover:bg-[#00ff80]/20 transition-colors">
-                    <Icon name={f.icon} size={22} className="text-[#00ff80]" />
-                  </div>
-                  <h3 className="font-display text-lg font-semibold uppercase tracking-wide mb-2">{f.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {whoCards.map(([title, desc], i) => (
+              <Reveal key={i} delay={i * 80}>
+                <div className="card-base p-7 h-full">
+                  <div className="font-display text-xl font-semibold mb-3" style={{ color: "var(--c-accent2)" }}>{title}</div>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--c-muted)" }}>{desc}</p>
                 </div>
-              </AnimSection>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA BANNER */}
-      <section className="py-24 px-6">
-        <AnimSection>
-          <div className="max-w-4xl mx-auto rounded-3xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#00ff80]/20 via-[#00e5ff]/10 to-[#7c3aed]/20" />
-            <div className="absolute inset-0 grid-bg opacity-30" />
-            <div className="relative z-10 p-12 md:p-16 text-center">
-              <h2 className="font-display text-4xl md:text-5xl font-bold uppercase mb-4">
-                Готовы начать?
-              </h2>
-              <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
-                Присоединяйтесь к тысячам клиентов, которые уже трансформировали свой бизнес.
-              </p>
-              <a
-                href="#contacts"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#00ff80] text-[#080d12] font-bold text-base hover:bg-[#00e5ff] transition-colors duration-300"
-              >
-                Начать прямо сейчас
-                <Icon name="ArrowRight" size={18} />
-              </a>
-            </div>
+      {/* WHAT YOU GET */}
+      <section className="py-24 px-6" style={{ background: "linear-gradient(180deg, var(--c-bg) 0%, #1a1426 50%, var(--c-bg) 100%)" }}>
+        <div className="max-w-5xl mx-auto">
+          <Reveal className="text-center mb-14">
+            <div className="ornament mb-6"><span className="text-xs uppercase tracking-widest px-3">Результаты</span></div>
+            <h2 className="font-display text-4xl md:text-5xl font-medium" style={{ lineHeight: 1.15 }}>
+              Что вы получите за{" "}
+              <span className="text-gold-shimmer">2 месяца</span>{" "}
+              работы со мной
+            </h2>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {getCards.map(([title, desc], i) => (
+              <Reveal key={i} delay={i * 70}>
+                <div className="card-base p-7 h-full">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold mb-4"
+                    style={{ background: "rgba(201,164,106,0.15)", color: "var(--c-accent)", border: "1px solid rgba(201,164,106,0.25)" }}
+                  >
+                    {i + 1}
+                  </div>
+                  <div className="font-semibold text-base mb-2" style={{ color: "var(--c-text)" }}>{title}</div>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--c-muted)" }}>{desc}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </AnimSection>
+        </div>
       </section>
 
-      {/* CONTACTS */}
-      <section id="contacts" className="py-28 px-6">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-start">
-          <AnimSection>
-            <span className="text-[#00ff80] text-xs font-semibold uppercase tracking-widest">Контакты</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold uppercase mt-3 mb-4">
-              Свяжитесь<br />с нами
+      {/* PROGRAM */}
+      <section id="program" className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <Reveal className="text-center mb-14">
+            <div className="ornament mb-6"><span className="text-xs uppercase tracking-widest px-3">Формат</span></div>
+            <h2 className="font-display text-4xl md:text-5xl font-medium mb-4" style={{ lineHeight: 1.15 }}>
+              Как построено обучение
             </h2>
-            <p className="text-white/50 text-base mb-8 leading-relaxed">
-              Оставьте заявку и мы свяжемся с вами в течение 24 часов. Расскажем подробности и ответим на все вопросы.
+            <p className="text-base max-w-xl mx-auto" style={{ color: "var(--c-muted)" }}>
+              Обучение выстроено так, чтобы не перегружать: постепенно войти в инструмент, начать практиковаться и не оставаться с вопросами один на один.
             </p>
-            <div className="flex flex-col gap-5">
-              {[
-                { icon: "Mail", label: "Email", val: "hello@example.com" },
-                { icon: "Phone", label: "Телефон", val: "+7 (800) 000-00-00" },
-                { icon: "MapPin", label: "Адрес", val: "Москва, Россия" },
-              ].map((c, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#00ff80]/10 flex items-center justify-center shrink-0">
-                    <Icon name={c.icon} size={18} className="text-[#00ff80]" />
-                  </div>
-                  <div>
-                    <div className="text-white/40 text-xs">{c.label}</div>
-                    <div className="text-white font-medium">{c.val}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </AnimSection>
+          </Reveal>
 
-          <AnimSection delay={150}>
-            {sent ? (
-              <div className="glow-border rounded-2xl p-10 bg-[#0d1520]/80 text-center">
-                <div className="w-16 h-16 rounded-full bg-[#00ff80]/20 flex items-center justify-center mx-auto mb-4">
-                  <Icon name="CheckCircle" size={32} className="text-[#00ff80]" />
-                </div>
-                <h3 className="font-display text-2xl font-bold uppercase mb-2">Отправлено!</h3>
-                <p className="text-white/50">Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
+          <div className="grid md:grid-cols-2 gap-10 items-start">
+            <Reveal>
+              <div className="grid gap-5">
+                {programFeatures.map(([icon, title, desc], i) => (
+                  <div key={i} className="card-base p-6 flex gap-4 items-start">
+                    <div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ background: "rgba(201,164,106,0.1)", border: "1px solid rgba(201,164,106,0.2)" }}
+                    >
+                      <Icon name={icon} size={20} style={{ color: "var(--c-accent)" }} />
+                    </div>
+                    <div>
+                      <div className="font-semibold mb-1" style={{ color: "var(--c-text)" }}>{title}</div>
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--c-muted)" }}>{desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="glow-border rounded-2xl p-8 bg-[#0d1520]/80 backdrop-blur flex flex-col gap-5"
-              >
-                <div>
-                  <label className="block text-xs text-white/40 uppercase tracking-widest mb-2">Имя</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Ваше имя"
-                    value={formData.name}
-                    onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00ff80]/50 transition-colors text-sm"
-                  />
+            </Reveal>
+
+            <Reveal delay={150}>
+              <div className="card-base p-8">
+                <div className="font-display text-xl font-semibold mb-5" style={{ color: "var(--c-accent2)" }}>
+                  Дополнительно в курсе:
                 </div>
-                <div>
-                  <label className="block text-xs text-white/40 uppercase tracking-widest mb-2">Email</label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00ff80]/50 transition-colors text-sm"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-white/40 uppercase tracking-widest mb-2">Сообщение</label>
-                  <textarea
-                    rows={4}
-                    placeholder="Расскажите о вашем проекте..."
-                    value={formData.message}
-                    onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00ff80]/50 transition-colors text-sm resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl bg-[#00ff80] text-[#080d12] font-bold text-base hover:bg-[#00e5ff] transition-colors duration-300 flex items-center justify-center gap-2"
+                <ul className="check-list">
+                  {[
+                    "Закрытый чат участников для вопросов и поддержки.",
+                    "Сопровождение в процессе обучения.",
+                    "Пошаговая система от базовых расчётов к практике.",
+                    "Применение и для себя, и в профессиональной деятельности.",
+                  ].map((t, i) => <li key={i}>{t}</li>)}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* AUTHOR */}
+      <section className="py-24 px-6" style={{ background: "linear-gradient(180deg, var(--c-bg) 0%, #1a1426 50%, var(--c-bg) 100%)" }}>
+        <div className="max-w-3xl mx-auto">
+          <Reveal className="text-center">
+            <div className="ornament mb-6"><span className="text-xs uppercase tracking-widest px-3">Об авторе</span></div>
+            <div
+              className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 font-display text-3xl font-semibold"
+              style={{ background: "rgba(200,168,255,0.12)", border: "1px solid rgba(200,168,255,0.25)", color: "var(--c-accent2)" }}
+            >
+              ЕУ
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-medium mb-4" style={{ lineHeight: 1.15 }}>
+              Екатерина Усова
+            </h2>
+            <p className="text-sm font-semibold uppercase tracking-widest mb-8" style={{ color: "var(--c-accent)" }}>
+              Психолог-практик · нумеролог · астропсихолог
+            </p>
+            <div className="card-base p-8 text-left">
+              <div className="grid gap-4">
+                {[
+                  "Екатерина Усова — психолог-практик, нумеролог и астропсихолог.",
+                  "Больше 5 лет в практике консультирования и передачи знаний через обучение.",
+                  "Десятки клиентов и индивидуальных разборов.",
+                ].map((t, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <span className="mt-1.5 shrink-0 text-xs" style={{ color: "var(--c-accent)" }}>✦</span>
+                    <p className="text-sm leading-relaxed" style={{ color: "var(--c-muted)" }}>{t}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+          <Reveal>
+            <div
+              className="rounded-3xl p-10 md:p-14 text-center relative overflow-hidden"
+              style={{ background: "linear-gradient(135deg, rgba(201,164,106,0.12) 0%, rgba(200,168,255,0.08) 100%)", border: "1px solid rgba(201,164,106,0.2)" }}
+            >
+              <div className="orb w-72 h-72 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ background: "rgba(201,164,106,0.06)" }} />
+              <div className="relative z-10">
+                <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--c-accent)" }}>Следующий шаг</div>
+                <h2 className="font-display text-4xl md:text-5xl font-medium mb-4" style={{ lineHeight: 1.15 }}>
+                  Полную программу и условия участия я собрала в чат-боте
+                </h2>
+                <p className="text-base mb-8 max-w-lg mx-auto" style={{ color: "var(--c-muted)" }}>
+                  Там можно посмотреть модули курса, узнать формат оплаты, задать вопросы и записаться на обучение.
+                </p>
+                <a
+                  href="https://t.me/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-gold text-lg"
+                  style={{ padding: "1rem 2.5rem" }}
                 >
-                  Отправить заявку
-                  <Icon name="Send" size={18} />
-                </button>
-              </form>
-            )}
-          </AnimSection>
+                  Посмотреть программу курса
+                  <Icon name="ArrowUpRight" size={18} />
+                </a>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-white/5 py-8 px-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="font-display text-lg font-semibold tracking-widest uppercase text-white/40">ПРОДУКТ</span>
-          <p className="text-white/20 text-sm">© 2026 Все права защищены</p>
-          <div className="flex gap-6 text-sm text-white/30">
-            <a href="#" className="hover:text-white/60 transition-colors">Политика конфиденциальности</a>
-            <a href="#" className="hover:text-white/60 transition-colors">Условия</a>
-          </div>
+      <footer
+        className="py-8 px-6 text-center text-xs"
+        style={{ borderTop: "1px solid rgba(201,164,106,0.1)", color: "var(--c-muted)" }}
+      >
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+          <span className="font-display text-base font-medium" style={{ color: "var(--c-accent)", opacity: 0.7 }}>
+            Екатерина Усова
+          </span>
+          <span>© Екатерина Усова</span>
+          <span className="max-w-xs text-center md:text-right opacity-60">
+            Результаты обучения зависят от личной практики и вовлечённости участника.
+          </span>
         </div>
       </footer>
     </div>

@@ -70,8 +70,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				display: ['Oswald', 'sans-serif'],
-				body: ['Golos Text', 'sans-serif'],
+				display: ['Cormorant Garamond', 'serif'],
+				body: ['Manrope', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {
