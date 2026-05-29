@@ -224,14 +224,16 @@ function ReviewsAccordion() {
   return (
     <section className="section">
       <div className="wrap">
-        <div ref={ref as React.Ref<HTMLDivElement>} className="reveal" style={{ borderRadius: "24px", border: "1px solid rgba(255,255,255,0.09)", overflow: "hidden" }}>
+        <div ref={ref as React.Ref<HTMLDivElement>} className="reveal">
           <button
             onClick={() => setOpen(o => !o)}
             style={{
               width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
-              padding: "22px 28px", background: "rgba(255,255,255,0.04)", border: "none", cursor: "pointer",
-              color: "var(--c-text)", fontFamily: "var(--font-b)", fontSize: "clamp(1rem, 0.9rem + 0.5vw, 1.2rem)", fontWeight: 700,
-              gap: "12px",
+              padding: "0 24px", minHeight: "52px", borderRadius: "9999px",
+              border: "1px solid rgba(201,164,106,0.35)", background: "rgba(201,164,106,0.08)",
+              cursor: "pointer", color: "var(--c-gold)", fontFamily: "var(--font-b)",
+              fontWeight: 700, fontSize: "clamp(0.875rem, 0.8rem + 0.35vw, 1rem)",
+              gap: "12px", transition: "background 220ms",
             }}
             aria-expanded={open}
           >
@@ -246,9 +248,7 @@ function ReviewsAccordion() {
           {open && (
             <div style={{
               display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-              gap: "16px", padding: "24px 28px",
-              background: "rgba(255,255,255,0.02)",
-              borderTop: "1px solid rgba(255,255,255,0.07)",
+              gap: "16px", marginTop: "16px",
             }}>
               {REVIEWS.map((r, i) => (
                 <img
