@@ -199,6 +199,74 @@ function BonusAccordion() {
   );
 }
 
+const REVIEWS = [
+  {
+    img: "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/df96004e-990f-44d5-9386-e09d5bc3e1db.jpeg",
+    alt: "Отзыв 1",
+  },
+  {
+    img: "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/c4695c42-9e58-4c2e-9b78-013a21b84eba.jpeg",
+    alt: "Отзыв 2",
+  },
+  {
+    img: "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/3f7634d3-fc4d-46c3-a059-29cafc92012d.jpeg",
+    alt: "Отзыв 3",
+  },
+  {
+    img: "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/fef4e391-38bb-4a20-ab3d-3ff93ad0936b.jpeg",
+    alt: "Отзыв 4",
+  },
+];
+
+function ReviewsAccordion() {
+  const [open, setOpen] = useState(false);
+  const ref = useReveal();
+  return (
+    <section className="section">
+      <div className="wrap">
+        <div ref={ref as React.Ref<HTMLDivElement>} className="reveal" style={{ borderRadius: "24px", border: "1px solid rgba(255,255,255,0.09)", overflow: "hidden" }}>
+          <button
+            onClick={() => setOpen(o => !o)}
+            style={{
+              width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+              padding: "22px 28px", background: "rgba(255,255,255,0.04)", border: "none", cursor: "pointer",
+              color: "var(--c-text)", fontFamily: "var(--font-b)", fontSize: "clamp(1rem, 0.9rem + 0.5vw, 1.2rem)", fontWeight: 700,
+              gap: "12px",
+            }}
+            aria-expanded={open}
+          >
+            <span>Отзывы о курсе</span>
+            <span style={{
+              width: "28px", height: "28px", borderRadius: "50%", background: "var(--c-gold)", color: "#1a1522",
+              display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", fontWeight: 700,
+              flexShrink: 0, transition: "transform var(--tr)",
+              transform: open ? "rotate(45deg)" : "rotate(0deg)",
+            }}>+</span>
+          </button>
+          {open && (
+            <div style={{
+              display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+              gap: "16px", padding: "24px 28px",
+              background: "rgba(255,255,255,0.02)",
+              borderTop: "1px solid rgba(255,255,255,0.07)",
+            }}>
+              {REVIEWS.map((r, i) => (
+                <img
+                  key={i}
+                  src={r.img}
+                  alt={r.alt}
+                  loading="lazy"
+                  style={{ width: "100%", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.09)", display: "block" }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Index() {
   return (
     <>
@@ -563,6 +631,9 @@ export default function Index() {
             </R>
           </div>
         </section>
+
+        {/* REVIEWS */}
+        <ReviewsAccordion />
 
         {/* AUTHOR */}
         <section className="section">
