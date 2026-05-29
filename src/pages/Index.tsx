@@ -350,12 +350,17 @@ export default function Index() {
           border: 1px solid transparent;
           cursor: pointer; white-space: nowrap;
         }
+        @keyframes gold-pulse {
+          0%, 100% { box-shadow: 0 12px 30px rgba(201,164,106,0.24); }
+          50% { box-shadow: 0 12px 44px rgba(201,164,106,0.62), 0 0 18px rgba(201,164,106,0.30); }
+        }
         .btn {
           background: linear-gradient(135deg, var(--c-gold), #e1c08f);
           color: #22160b; font-weight: 800;
           box-shadow: 0 12px 30px rgba(201,164,106,0.24);
+          animation: gold-pulse 2.6s ease-in-out infinite;
         }
-        .btn:hover { background: linear-gradient(135deg, var(--c-gold-h), #eacf9f); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(201,164,106,0.35); }
+        .btn:hover { background: linear-gradient(135deg, var(--c-gold-h), #eacf9f); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(201,164,106,0.35); animation: none; }
         .btn-sec {
           border-color: rgba(255,255,255,0.14);
           background: rgba(255,255,255,0.04);
