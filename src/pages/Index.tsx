@@ -201,10 +201,6 @@ function BonusAccordion() {
 
 const REVIEWS = [
   {
-    img: "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/df96004e-990f-44d5-9386-e09d5bc3e1db.jpeg",
-    alt: "Отзыв 1",
-  },
-  {
     img: "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/c4695c42-9e58-4c2e-9b78-013a21b84eba.jpeg",
     alt: "Отзыв 2",
   },
