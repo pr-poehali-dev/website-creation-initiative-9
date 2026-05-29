@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const PHOTO =
-  "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/309872e0-5c35-4af7-af30-fd44780a43c4.jpeg";
+  "https://cdn.poehali.dev/projects/509b3616-eefd-4714-a649-aa305bef5803/bucket/5eea637d-726d-4e0f-83cb-3a604f3404a2.png";
 
 function useReveal() {
   const ref = useRef<HTMLElement>(null);
