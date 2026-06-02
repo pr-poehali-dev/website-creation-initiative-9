@@ -511,7 +511,7 @@ export default function Index() {
               <span className="brand-sub">Практический курс по нумерологии</span>
             </span>
           </a>
-          <a className="btn header-btn-short" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer">Присоединиться</a>
+          <a className="btn header-btn-short" href="https://usova-ekaterina.getplatinum.ru/payment/NL9q5tf" target="_blank" rel="noopener noreferrer">Присоединиться</a>
         </div>
       </header>
 
@@ -522,7 +522,7 @@ export default function Index() {
         background: "linear-gradient(to top, rgba(23,19,29,0.98) 60%, transparent)",
         display: "flex", justifyContent: "center",
       }} className="mobile-cta-bar">
-        <a className="btn" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer" style={{ width: "100%", maxWidth: "400px", justifyContent: "center" }}>
+        <a className="btn" href="https://usova-ekaterina.getplatinum.ru/payment/NL9q5tf" target="_blank" rel="noopener noreferrer" style={{ width: "100%", maxWidth: "400px", justifyContent: "center" }}>
           Присоединиться к курсу
         </a>
       </div>
@@ -664,7 +664,7 @@ export default function Index() {
             <R className="cta-shell">
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "24px" }}>
                 <h2>Остались вопросы? Хотите узнать про рассрочку?</h2>
-                <a className="btn" href="https://t.me/yourusername" target="_blank" rel="noopener noreferrer">
+                <a className="btn" href="https://usova-ekaterina.getplatinum.ru/payment/NL9q5tf" target="_blank" rel="noopener noreferrer">
                   Задать вопрос
                 </a>
               </div>
