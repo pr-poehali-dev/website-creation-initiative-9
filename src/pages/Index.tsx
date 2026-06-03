@@ -664,8 +664,8 @@ export default function Index() {
             <R className="cta-shell">
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: "24px" }}>
                 <h2>Остались вопросы? Хотите узнать про рассрочку?</h2>
-                <a className="btn" href="https://usova-ekaterina.getplatinum.ru/payment/NL9q5tf" target="_blank" rel="noopener noreferrer">
-                  Задать вопрос
+                <a className="btn" href="https://t.me/m/aDxoOosMZmEy" target="_blank" rel="noopener noreferrer">
+                  Задать вопрос лично Екатерине
                 </a>
               </div>
             </R>
