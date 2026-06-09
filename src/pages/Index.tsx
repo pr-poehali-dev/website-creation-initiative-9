@@ -690,17 +690,6 @@ export default function Index() {
                 ))}
               </div>
 
-              <div style={{ marginTop: "36px" }}>
-                <a
-                  className="btn"
-                  href="https://usova-ekaterina.getplatinum.ru/payment/NL9q5tf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ width: "100%", justifyContent: "center" }}
-                >
-                  Присоединиться к курсу
-                </a>
-              </div>
             </R>
           </div>
         </section>
