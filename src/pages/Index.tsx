@@ -619,6 +619,92 @@ export default function Index() {
           </div>
         </section>
 
+        {/* CONDITIONS */}
+        <section className="section" id="conditions">
+          <div className="wrap" style={{ display: "flex", justifyContent: "center" }}>
+            <R style={{
+              background: "linear-gradient(135deg, rgba(72,40,100,0.55) 0%, rgba(30,20,50,0.85) 60%, rgba(20,14,36,0.95) 100%)",
+              border: "1px solid rgba(180,140,255,0.18)",
+              borderRadius: "24px",
+              padding: "48px 52px",
+              maxWidth: "600px",
+              width: "100%",
+              boxShadow: "0 8px 48px rgba(120,60,200,0.18), 0 1px 0 rgba(200,160,255,0.08) inset",
+              position: "relative",
+              overflow: "hidden",
+            }}>
+              {/* decorative glow */}
+              <div style={{
+                position: "absolute", top: "-60px", right: "-60px",
+                width: "220px", height: "220px",
+                background: "radial-gradient(circle, rgba(180,120,255,0.18) 0%, transparent 70%)",
+                pointerEvents: "none",
+              }} />
+              <p style={{
+                fontSize: "clamp(0.75rem, 2vw, 0.8rem)",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "rgba(200,170,255,0.6)",
+                marginBottom: "20px",
+                fontWeight: 500,
+              }}>Условия участия</p>
+
+              <div style={{
+                fontSize: "clamp(2.4rem, 8vw, 3.6rem)",
+                fontWeight: 800,
+                lineHeight: 1,
+                marginBottom: "6px",
+                background: "linear-gradient(90deg, #e8c97a 0%, #f5e0a0 50%, #c9a84c 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>40 000 ₽</div>
+
+              <p style={{
+                color: "rgba(200,170,255,0.55)",
+                fontSize: "1rem",
+                marginBottom: "36px",
+                letterSpacing: "0.04em",
+              }}>2 месяца</p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                {[
+                  "онлайн-формат",
+                  "сопровождение в процессе",
+                  "закрытый чат",
+                ].map((item) => (
+                  <div key={item} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <span style={{
+                      width: "22px", height: "22px", flexShrink: 0,
+                      borderRadius: "50%",
+                      background: "linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "0.7rem",
+                      boxShadow: "0 0 10px rgba(139,92,246,0.5)",
+                    }}>✓</span>
+                    <span style={{
+                      color: "rgba(235,225,255,0.88)",
+                      fontSize: "clamp(0.95rem, 2.5vw, 1.05rem)",
+                    }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ marginTop: "36px" }}>
+                <a
+                  className="btn"
+                  href="https://usova-ekaterina.getplatinum.ru/payment/NL9q5tf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ width: "100%", justifyContent: "center" }}
+                >
+                  Присоединиться к курсу
+                </a>
+              </div>
+            </R>
+          </div>
+        </section>
+
         {/* PROGRAM */}
         <section className="section" id="program">
           <div className="wrap split">
